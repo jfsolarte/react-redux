@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
     baseURL: 'http://localhost:3001',
   });
 
-export default {
+const api = {
     results:{
         get:(text) => axiosInstance({
             url:'/api/items?q='+text,
@@ -19,3 +19,5 @@ export default {
         })
     }
 }
+
+export default api; 

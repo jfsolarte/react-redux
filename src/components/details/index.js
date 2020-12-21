@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Page from './page';
-import findCurrentItem, { findCurrentItemThunk } from '../../redux/actions/findCurrentItem';
+import { findCurrentItemThunk } from '../../redux/actions/findCurrentItem';
 
 
 class Details extends Component {
@@ -29,7 +29,9 @@ class Details extends Component {
         const {
             currentItem,
         } = this.props;
-        console.info(currentItem); 
+
+        
+        //console.info(currentItem); 
         return (
             <Page
                 item={currentItem}

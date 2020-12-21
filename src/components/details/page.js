@@ -4,12 +4,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AppBar from '../appBar';
 import CurrencyFormat from 'react-currency-format';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import './style.sass';
 
 function Page(props) {
     const {
-        goTo,
+        //goTo,
         item,
     } = props;
 
@@ -39,23 +39,24 @@ function Page(props) {
                 <div className="details-page">
                     <div className="details-header">
                         <div className="details-img">
-                            <img src={item.picture}></img>
+                            <img src={item.picture} alt="product" />
+                            <div className="details-description">
+                                <h2>Descripción del Producto</h2>
+                                <p>{item.description} </p>
+                            </div>
                         </div>
                         <div className="details-data">
                             <p className="quality"><Conditions condition={item.condition} /> - {item.sold_quantity} Vendidos</p>
                             <h2 className="title">{item.title} </h2>
                             <div className="price">
-                            <CurrencyFormat value={item.price.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                                <CurrencyFormat value={item.price.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                             </div>
-                            
+
                             <button className="btn-buy">Comprar</button>
-                            
+
                         </div>
                     </div>
-                    <div className="details-description">
-                        <h2>Descripción del Producto</h2>
-                        <p>{item.description} </p>
-                    </div>
+
                 </div>
                 :
                 <CircularProgress className="item-loader" />

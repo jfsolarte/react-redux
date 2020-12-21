@@ -9,7 +9,7 @@ class Results extends Component {
 
         this.state = {
         };
-
+        
         this.goTo = this.goTo.bind(this);
     }
 
@@ -21,7 +21,7 @@ class Results extends Component {
         const {
             results,
         } = this.props;
-
+        
         return (
             <Page
                 results={results}

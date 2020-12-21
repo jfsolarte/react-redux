@@ -10,7 +10,7 @@ import './style.sass';
 function Page(props) {
     const {
         results,
-        goTo,
+        //goTo,
     } = props;
 
     const isEmpty = results.length === 0;
@@ -38,7 +38,7 @@ function Page(props) {
             <div className="results-page">
                 {isEmpty ?
                     <Typography variant="h5" component="h3" className="page-message">
-                        There are no results
+                        No Hay Resultados
                     </Typography>
                     :
                     results.map(item =>
@@ -48,11 +48,11 @@ function Page(props) {
                         >
                             <div className="card">
                                 <div className="card-img">
-                                    <img src={item.picture} alt="item.title" />
+                                    <img src={item.picture} alt={item.title} />
                                 </div>
                                 <div className="card-details">
                                     <div className="card-title">
-                                        <p><CurrencyFormat value={item.price.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /> {item.free_shipping ? <img title="Envío gratis" src="./assets/ic_shipping.png" /> : <span></span>}</p>
+                                        <p><CurrencyFormat value={item.price.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /> {item.free_shipping ? <img alt="shipping" title="Envío gratis" src="./assets/ic_shipping.png" /> : <span></span>}</p>
                                     </div>
                                     <div className="card-title-product">
                                     <Link to={{pathname: `/details/${item.id}`}}>

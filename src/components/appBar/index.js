@@ -3,20 +3,32 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Page from './page';
 import findSuggestions from '../../redux/actions/findSuggestions';
-import findResults from '../../redux/actions/findResults';
-import searchResultsThunk from '../../redux/actions/searchResultsThunk';
+import  {searchResultsThunk} from '../../redux/actions/findResults';
+
 
 
 class IAppBar extends Component {
     constructor(props) {
         super(props);
-
+        const {
+            searchResultsThunk,
+        } = this.props;
+        let text=''; 
+        const query = new URLSearchParams(this.props.location.search);
+        if(query.get('q')){
+            text = query.get('q');
+        }
         this.state = {
-            text: '',
+            text: text,
         };
-
+         
         this.onChangeText = this.onChangeText.bind(this);
         this.onChangeSelection = this.onChangeSelection.bind(this);
+        if(query.get('q')){
+            
+            searchResultsThunk(text);
+        }
+       
     }
 
     onChangeText(text) {
@@ -27,7 +39,6 @@ class IAppBar extends Component {
 
     onChangeSelection(text) {
         const {
-            findResults,
             match,
             history,
             searchResultsThunk,
@@ -35,7 +46,6 @@ class IAppBar extends Component {
 
         this.setState({ text });
         searchResultsThunk(text); 
-        //findResults(text);
         
 
         if (match.path !== '/results?q='+text) {
@@ -69,7 +79,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     findSuggestions,
-    //findResults,
     searchResultsThunk,
 };
 

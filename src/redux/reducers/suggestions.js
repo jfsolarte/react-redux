@@ -2,7 +2,7 @@
 
 
 import { type as findSuggestionsType } from '../actions/findSuggestions';
-import items from '../../data/items';
+//import items from '../../data/items';
 
 const defaultState = [];
 
@@ -12,10 +12,10 @@ function reducer(state = defaultState, { type, payload }) {
             if (!payload) {
                 return [];
             }
+            return [];
+            //const regex = new RegExp(`^${payload}` , 'i');
 
-            const regex = new RegExp(`^${payload}` , 'i');
-
-            return items.filter(n => regex.test(n.title));
+            //return items.filter(n => regex.test(n.title));
         }
 
         default:
