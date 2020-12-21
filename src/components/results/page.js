@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+
+import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import CurrencyFormat from 'react-currency-format';
 import AppBar from '../appBar';
 import './style.sass';
 
@@ -15,7 +14,21 @@ function Page(props) {
     } = props;
 
     const isEmpty = results.length === 0;
+    function Conditions(condition){
+        condition = condition.condition;  
+        let textCondition = 'No Definido';
+        switch (condition) {
+            case "new":
+                textCondition = 'Nuevo';
+                break;
+        
+            default:
+                textCondition = condition+'';
+                break;
+        }
 
+        return textCondition; 
+    }
     return (
         <Fragment>
             <CssBaseline />
@@ -33,27 +46,24 @@ function Page(props) {
                             key={item.id}
                             className="card-container"
                         >
-                            <div
-                                className="card"
-                                onClick={() => goTo(`/details/${item.id}`)}
-                            >
-                                <CardActionArea>
-                                    <CardMedia
-                                        className="card-media"
-                                        image={item.image}
-                                        title={item.title}
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {item.title}
-                                        </Typography>
-                                        <Typography component="p">
-                                            {item.content}
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
+                            <div className="card">
+                                <div className="card-img">
+                                    <img src={item.picture} alt="item.title" />
+                                </div>
+                                <div className="card-details">
+                                    <div className="card-title">
+                                        <p><CurrencyFormat value={item.price.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} /> {item.free_shipping ? <img title="Envío gratis" src="./assets/ic_shipping.png" /> : <span></span>}</p>
+                                    </div>
+                                    <div className="card-title-product">
+                                    <Link to={{pathname: `/details/${item.id}`}}>
+                                        {item.title}
+                                    </Link>
+                                    </div>
+                                    <Conditions condition={item.condition} />
+                                </div>
+
                             </div>
-                    </div>)
+                        </div>)
                 }
             </div>
         </Fragment>

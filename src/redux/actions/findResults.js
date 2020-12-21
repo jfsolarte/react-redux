@@ -1,8 +1,8 @@
 export const type = 'findResults';
 
-const findResults = (text) => ({
+const findResults = (items) => ({
     type,
-    payload: text,
+    payload: items,
 });
 
 export default findResults;

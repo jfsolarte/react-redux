@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import Page from './page';
 import findSuggestions from '../../redux/actions/findSuggestions';
 import findResults from '../../redux/actions/findResults';
+import searchResultsThunk from '../../redux/actions/searchResultsThunk';
+
 
 class IAppBar extends Component {
     constructor(props) {
@@ -28,14 +30,16 @@ class IAppBar extends Component {
             findResults,
             match,
             history,
+            searchResultsThunk,
         } = this.props;
 
         this.setState({ text });
+        searchResultsThunk(text); 
+        //findResults(text);
+        
 
-        findResults(text);
-
-        if (match.path !== '/results') {
-            history.push('/results');
+        if (match.path !== '/results?q='+text) {
+            history.push('/results?q='+text);
         }
     }
 
@@ -65,7 +69,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     findSuggestions,
-    findResults,
+    //findResults,
+    searchResultsThunk,
 };
 
 export default withRouter(
